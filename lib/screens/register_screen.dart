@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -26,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Log In',
+                  'Sign Up',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -35,11 +36,26 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Welcome back! Please login to your account.',
+                  'Try it free without commitment now!',
                   style: TextStyle(color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 30),
+                TextFormField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    labelText: 'Name',
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter your name',
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Name cannot be empty';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 20),
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -74,7 +90,7 @@ class LoginScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      // Implementasi logika login
+                      // Implementasi logika registrasi
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -83,21 +99,60 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text('Log in'),
+                  child: Text('Create new account'),
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildSocialButton(
+                      icon: Icons.g_translate, // Ganti dengan icon Google
+                      label: 'Google',
+                      onTap: () {
+                        // Aksi login Google
+                      },
+                    ),
+                    SizedBox(width: 10),
+                    _buildSocialButton(
+                      icon: Icons.facebook,
+                      label: 'Facebook',
+                      onTap: () {
+                        // Aksi login Facebook
+                      },
+                    ),
+                  ],
                 ),
                 SizedBox(height: 20),
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/register');
+                      Navigator.pushReplacementNamed(context, '/login');
                     },
-                    child: Text('Don’t have an account? Sign up'),
+                    child: Text('Already have an account? Log in'),
                   ),
                 ),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSocialButton({required IconData icon, required String label, required VoidCallback onTap}) {
+    return ElevatedButton.icon(
+      onPressed: onTap,
+      icon: Icon(icon, size: 20),
+      label: Text(label),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.white,
+        onPrimary: Colors.black,
+        elevation: 0,
+        side: BorderSide(color: Colors.grey),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       ),
     );
   }
