@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:travelgo_mobile/screens/home_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -18,16 +27,25 @@ class RegisterScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 SizedBox(height: 20),
-                // Placeholder for logo
+                // Placeholder logo
                 Center(
-                  child: Image.network(
-                    'https://via.placeholder.com/100', // Ganti dengan logo yang sesuai
-                    height: 50,
+                  child: InkWell(
+                    onTap: () {
+                       Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                    },
+                    child: Text(
+                      'Travelgo', // Ganti dengan teks yang diinginkan
+                      style: TextStyle(
+                        fontSize: 24, // Ukuran font
+                        fontWeight: FontWeight.bold, // Ketebalan font
+                        color: Colors.black, // Warna teks
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Sign Up',
+                  'Registrasi Akun',
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -35,18 +53,13 @@ class RegisterScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
-                Text(
-                  'Try it free without commitment now!',
-                  style: TextStyle(color: Colors.grey),
-                  textAlign: TextAlign.center,
-                ),
                 SizedBox(height: 30),
                 TextFormField(
                   controller: nameController,
                   decoration: InputDecoration(
-                    labelText: 'Name',
+                    labelText: 'Nama',
                     border: OutlineInputBorder(),
-                    hintText: 'Enter your name',
+                    hintText: 'Masukan nama',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -61,7 +74,7 @@ class RegisterScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
-                    hintText: 'Enter your email',
+                    hintText: 'Masukan email',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -77,7 +90,7 @@ class RegisterScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(),
-                    hintText: 'Enter your password',
+                    hintText: 'Masukan password',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -99,28 +112,7 @@ class RegisterScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text('Create new account'),
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildSocialButton(
-                      icon: Icons.g_translate, // Ganti dengan icon Google
-                      label: 'Google',
-                      onTap: () {
-                        // Aksi login Google
-                      },
-                    ),
-                    SizedBox(width: 10),
-                    _buildSocialButton(
-                      icon: Icons.facebook,
-                      label: 'Facebook',
-                      onTap: () {
-                        // Aksi login Facebook
-                      },
-                    ),
-                  ],
+                  child: Text('Buat Akun'),
                 ),
                 SizedBox(height: 20),
                 Center(
@@ -128,7 +120,7 @@ class RegisterScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacementNamed(context, '/login');
                     },
-                    child: Text('Already have an account? Log in'),
+                    child: Text('Sudah punya akun? Masuk'),
                   ),
                 ),
               ],
@@ -139,7 +131,10 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSocialButton({required IconData icon, required String label, required VoidCallback onTap}) {
+  Widget _buildSocialButton(
+      {required IconData icon,
+      required String label,
+      required VoidCallback onTap}) {
     return ElevatedButton.icon(
       onPressed: onTap,
       icon: Icon(icon, size: 20),

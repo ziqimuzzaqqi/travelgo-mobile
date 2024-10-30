@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:travelgo_mobile/screens/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -19,9 +27,21 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 // Placeholder for logo
                 Center(
-                  child: Image.network(
-                    'https://via.placeholder.com/100', // Ganti dengan logo yang sesuai
-                    height: 50,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen()));
+                    },
+                    child: Text(
+                      'Travelgo', // Ganti dengan teks yang diinginkan
+                      style: TextStyle(
+                        fontSize: 24, // Ukuran font
+                        fontWeight: FontWeight.bold, // Ketebalan font
+                        color: Colors.black, // Warna teks
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
@@ -35,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Welcome back! Please login to your account.',
+                  'Selamat Datang! Masuk untuk perjalananmu.',
                   style: TextStyle(color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
@@ -45,7 +65,7 @@ class LoginScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Email',
                     border: OutlineInputBorder(),
-                    hintText: 'Enter your email',
+                    hintText: 'Masukan email',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -61,7 +81,7 @@ class LoginScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(),
-                    hintText: 'Enter your password',
+                    hintText: 'Masukan password',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -83,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text('Log in'),
+                  child: Text('Masuk'),
                 ),
                 SizedBox(height: 20),
                 Center(
@@ -91,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacementNamed(context, '/register');
                     },
-                    child: Text('Don’t have an account? Sign up'),
+                    child: Text('Belum punya akun? Daftar'),
                   ),
                 ),
               ],
