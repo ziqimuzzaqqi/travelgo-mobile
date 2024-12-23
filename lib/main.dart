@@ -3,6 +3,7 @@ import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/detail_screen.dart';
+import 'screens/order_screen.dart';
 
 void main() {
   runApp(TravelgoApp());
@@ -23,6 +24,7 @@ class TravelgoApp extends StatelessWidget {
         '/register': (context) => RegisterScreen(),
         '/home': (context) => HomeScreen(),
         '/detail': (context) => DetailScreen(carId: 1),
+        '/order': (context) => OrderScreen(),
       },
     );
   }
