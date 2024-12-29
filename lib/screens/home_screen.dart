@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travelgo_mobile/screens/detail_screen.dart';
-import 'package:travelgo_mobile/screens/login_screen.dart';
+import 'package:travelgo_mobile/screens/profile_setting_screen.dart'; // Import halaman profil
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,8 +17,12 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.person),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileSettingsScreen(),
+                ),
+              );
             },
           ),
         ],
